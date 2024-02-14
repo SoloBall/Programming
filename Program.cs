@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Runtime.Remoting.Services;
+using System.Text;
 using System.Xml.Schema;
 
 namespace programming
@@ -111,6 +112,12 @@ namespace programming
 
             //Console.WriteLine("Enter a string: ");
             //AscendingSort(Console.ReadLine());
+
+            //int[] nums = { 1, 2, 3, 4, 5, 6 };
+            //int rotatedInt = ArrayRotation(nums, 3);
+
+            Console.Write("Enter an amount of dice: ");
+            DiceThrow(int.Parse(Console.ReadLine()));
         }
 
         static void PrimeNumbers(int max)
@@ -480,6 +487,54 @@ namespace programming
             }
             Console.WriteLine(result);
             Console.Read();
+        }
+
+        static int[] ArrayRotation(int[] nums, int rotations)
+        {
+            List<int> list = new List<int>();
+            foreach (int n in nums)
+            {
+                list.Add(n);
+            }
+            for (int i = 0; i < rotations; i++)
+            {
+                list.Add(0);
+                for (int j = list.Count - 2; j >= 0; j--)
+                {
+                    list.Insert(j + 1, list[j]);
+                    list.RemoveAt(j + 2);
+                }
+                list.Insert(0, list[list.Count - 1]);
+                list.RemoveAt(1);
+                list.RemoveAt(list.Count - 1);
+            }
+            return list.ToArray();
+        }
+
+        static void DiceThrow(int sides)
+        {
+            Random rand = new Random();
+            int rolls = 0;
+            int sixes = 0;
+            List<int> list = new List<int>();
+            while (sixes != sides)
+            {
+                sixes = 0;
+                for (int i = 0; i < sides; i++)
+                {
+                    list.Add(rand.Next(1, 7));
+                }
+                foreach (int n in list)
+                {
+                    if (n == 6)
+                    {
+                        sixes++;
+                    }
+                }
+                list = new List<int>();
+                rolls++;
+            }
+            Console.WriteLine($"Amount of dice throws: {rolls}");
         }
 
         // Basic:
