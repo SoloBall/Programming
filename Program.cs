@@ -105,7 +105,8 @@ namespace programming
             //Console.Write("Enter a number: ");
             //IsEven(Console.ReadLine());
 
-            //IsSorted();
+            //Console.WriteLine("Enter 3 numbers separated by enter or new line");
+            //IsSorted(new int[] { int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()) } );
 
             //Console.Write("Enter a number: ");
             //CheckNum(Console.ReadLine());
@@ -116,8 +117,13 @@ namespace programming
             //int[] nums = { 1, 2, 3, 4, 5, 6 };
             //int rotatedInt = ArrayRotation(nums, 3);
 
-            Console.Write("Enter an amount of dice: ");
-            DiceThrow(int.Parse(Console.ReadLine()));
+            //Console.Write("Enter an amount of dice: ");
+            //DiceThrow(int.Parse(Console.ReadLine()));
+
+            //Console.WriteLine(OddManOut().ToString());
+
+            Game game = new Game();
+            
         }
 
         static void PrimeNumbers(int max)
@@ -707,15 +713,8 @@ namespace programming
             }
         }
 
-        static void IsSorted()
+        static void IsSorted(int[] nums)
         {
-            /* I have an old version of c# apparently, so i can't give an array as an argument without the array being a variable
-               example to show that i know how to do it: 
-               static void IsSorted(int[] nums){} --> IsSorted([1, 2, 3]);
-            */
-
-            Console.WriteLine("Enter 3 numbers separated by enter or new line");
-            int[] nums = { int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()), int.Parse(Console.ReadLine()) };
 
             if (nums[0] < nums[1] && nums[1] < nums[2])
             {
@@ -751,6 +750,30 @@ namespace programming
                 result += c;
             }
             return result;
+        }
+
+        static int OddManOut()
+        {
+            int[] nums = { 9, 3, 9, 3, 9, 7, 7 };
+            List<int> list = nums.ToList();
+
+            list.Sort();
+            for (int i = 0; i < list.Count(); i++)
+            {
+                if (list.Count() == 1)
+                {
+                    return list[0];
+                }
+                if (i == list.Count() - 1 || list[i] != list[i + 1])
+                {
+                    return list[i];
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            return 0;
         }
     }
 }
